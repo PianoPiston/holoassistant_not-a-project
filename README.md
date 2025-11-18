@@ -1,4 +1,4 @@
-#This is not a project, go check out my other stuff instead.  just sharing with my team
+# This is not a project, go check out my other stuff instead.  just sharing with my team
 
 venv tai pyenv 3.12.12, koska mediapipe ei tue 3.13:aa. 
 laita pycache gitignore:een jos se menee sinne  
