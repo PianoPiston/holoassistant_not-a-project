@@ -3,6 +3,8 @@ from panda3d.core import *
 from math import sin, cos, radians
 from tracker import FaceTracker
 from math import sin, cos, radians
+from talkassistant import VoiceAgent ## added
+import threading ## added
 
 # Right, so unfortunately multithreading had to be involved. too bad, but i have no other choice.
 # the code will load a panda model, track the user's nose position via camera in another thread
@@ -16,6 +18,7 @@ class MyApp(ShowBase):
         ShowBase.__init__(self)
 
         self.tracker = FaceTracker()
+        self.voice_agent = VoiceAgent("AIzaSyBszg4fZnTYqNiRPhwuQT7H0uibZOkil5o") ## added
 
         # Load Panda model
         self.panda = self.loader.loadModel("panda")
@@ -23,6 +26,7 @@ class MyApp(ShowBase):
         self.panda.setScale(0.3)
         self.panda.setPos(0, 0, 0)
         self.panda.setH(180)   # orient model to face camera
+        self.setBackgroundColor(0, 0, 0)
         
         # --- Compute model bounds and center (in world / render coordinates) ---
         # getTightBounds(relativeTo) gives (minPoint, maxPoint) in coordinates of 'relativeTo'.
@@ -52,6 +56,21 @@ class MyApp(ShowBase):
 
         # Add update task
         self.taskMgr.add(self.update_camera, "UpdateCameraTask")
+        
+        self.voice_thread = threading.Thread(target=self.voice_agent.start_loop, daemon=True) 
+        self.voice_thread.start() ## added## added
+
+    def servo_x(self, direction):
+        if direction == "right":
+            print(f"Servo X moved {direction}")
+        if direction == "left":
+            print(f"Servo X moved {direction}")
+
+    def servo_y(self, direction):
+        if direction == "up":
+            print(f"Servo Y moved {direction}")
+        if direction == "down":
+            print(f"Servo Y moved {direction}")
 
     def update_camera(self, task):
         # read normalized nose coords 0..1
@@ -76,6 +95,15 @@ class MyApp(ShowBase):
         dir_x = sin(h) * cos(v)
         dir_y = cos(h) * cos(v)
         dir_z = sin(v)
+
+        if nx >= 0.9:
+            self.servo_x("right")
+        if nx <= 0.1:
+            self.servo_x("left")
+        if ny >= 0.9:
+            self.servo_y("up")
+        if ny <= 0.1:   
+            self.servo_y("down")
 
         # Camera world position = center + direction * distance
         cam_offset = Vec3(dir_x, dir_y, dir_z) * self.camera_distance
