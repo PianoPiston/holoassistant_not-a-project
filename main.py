@@ -18,7 +18,7 @@ class MyApp(ShowBase):
         ShowBase.__init__(self)
 
         self.tracker = FaceTracker()
-        self.voice_agent = VoiceAgent("AIzaSyBszg4fZnTYqNiRPhwuQT7H0uibZOkil5o") ## added
+        self.voice_agent = VoiceAgent("api key here") ## added
 
         # Load Panda model
         self.panda = self.loader.loadModel("panda")
