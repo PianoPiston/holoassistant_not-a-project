@@ -95,3 +95,38 @@ class VoiceAgent:
                 if response:
                     print(f"\n--- GEMINI ---\n{response}\n--------------\n")
                     self.speak(response)
+
+# below is a dummy function that is used on my specific raspberry pi so that it actually detects the mic.
+"""
+def listen_once(self):
+        """Listens for one phrase and returns text."""
+        # ----------------------------------------------------
+        # FIX: Explicitly set the device index to '11' (your 'default' mic)
+        # Change this line:
+        # with sr.Microphone() as source:
+        # To this:
+        with sr.Microphone(device_index=11) as source:
+        # ----------------------------------------------------
+            print("[Voice] Adjusting for noise...")
+            # You might need to increase the duration if the noise adjustment fails
+            self.recognizer.adjust_for_ambient_noise(source, duration=0.7) 
+            print("[Voice] Listening (waiting for 1.5s pause)...")
+            
+            try:
+                audio = self.recognizer.listen(source, timeout=None) 
+                
+                print("[Voice] Processing audio...")
+                text = self.recognizer.recognize_google(audio)
+                print(f"[Voice] User said: '{text}'")
+                return text
+            except sr.UnknownValueError:
+                # If it hears noise but no clear words
+                return None
+            except sr.RequestError:
+                print("[Voice] Connection error during recognition.")
+                return None
+            except Exception as e:
+                # Handle general errors (like audio buffer issues)
+                print(f"[Voice] Error during listening: {e}")
+                return None
+"""
