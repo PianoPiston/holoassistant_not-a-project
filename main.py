@@ -18,7 +18,7 @@ class MyApp(ShowBase):
         ShowBase.__init__(self)
 
         self.tracker = FaceTracker()
-        self.voice_agent = VoiceAgent("api key here") ## added
+        self.voice_agent = VoiceAgent("test api key commit") ## added
 
         # Load Panda model
         self.panda = self.loader.loadModel("panda")
