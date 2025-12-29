@@ -2,7 +2,7 @@
 
 **Experimental / proof-of-concept repository**  
 This is not a polished or packaged project — it’s a proof of concept for a university course.
-Things may be messy. The code that controls the servos are on the pi, not on this repository, functions incomplete.
+Things may be messy. The code that controls the servos are on the pi, not on this repository. therefore functions are incomplete.
 
 ---
 
@@ -19,7 +19,8 @@ HoloAssistant combines:
 - **Text-to-speech**
   - Audio output via google's text to speech api, which turns gemini's output into real speech
 - **3D application layer**
-  - Panda3D model that rotates based on where your nose is, creating a real time 3D holographic effect (ratios are wrong and need to be manually tuned to each webcam's fov)
+  - Panda3D model that rotates based on where your nose is, creating a real time 3D holographic effect
+  - (ratios are wrong and need to be manually tuned to each webcam's fov)
 
 All glued together in Python with some multithreading.
 
@@ -34,15 +35,16 @@ All glued together in Python with some multithreading.
 ├── talkassistant.py        # Voice + AI assistant logic
 ├── .vscode/                # Editor config / stubs
 └── README.md               # .
+```
 
 ## Setup
-
-0. Make sure you have a functional webcam and microphone, make sure microphone sensitivity is set to a reasonable amount like 30-70%. too high or too low will cause the python library to fail.
+```
+0. Make sure you have a functional webcam and microphone, microphone sensitivity 30-60% or stt library will fail
 1. Install Python 3.12.12 (with pyenv for example)
 2. Create a virtual environment (pyenv/venv)
 3. Go into the virtual environment and clone this repository
 4. cd into the repository
-5. Run:
+```
 
 ```bash
 pip install opencv-python mediapipe panda3d SpeechRecognition google-generativeai gTTS
