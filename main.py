@@ -6,12 +6,9 @@ from math import sin, cos, radians
 from talkassistant import VoiceAgent ## added
 import threading ## added
 
-# Right, so unfortunately multithreading had to be involved. too bad, but i have no other choice.
 # the code will load a panda model, track the user's nose position via camera in another thread
 # then compute the model's center (as a node) and radius to position the camera at a good distance,
 # and then it will move the camera around the node based on nose position with some trigonometry
-# ai hallucinated so much doing this that i had to basically tell it exactly what to do, more software
-# design than actually writing code
 
 class MyApp(ShowBase):
     def __init__(self):
@@ -43,20 +40,17 @@ class MyApp(ShowBase):
         bbox_diag = (max_pt - min_pt).length()
         self.model_radius = bbox_diag * 0.5
 
-        # choose camera distance as a multiple of model_radius (tweak factor for taste)
+        # choose camera distance as a multiple of model_radius
         self.camera_distance = max(5.0, self.model_radius * 3.5)
 
-        # Optionally create a node at center if you want to reference it
         self.center_node = self.render.attachNewNode("model_center")
         self.center_node.setPos(self.model_center)
 
-        # initial camera placement (so there's no flash)
         self.camera.setPos(self.model_center + (0, -self.camera_distance, 0))
         self.camera.lookAt(self.model_center)
 
         # Add update task
         self.taskMgr.add(self.update_camera, "UpdateCameraTask")
-        
         self.voice_thread = threading.Thread(target=self.voice_agent.start_loop, daemon=True) 
         self.voice_thread.start() ## added## added
 
