@@ -29,12 +29,13 @@ All glued together in Python with some multithreading.
 ## Structure
 
 ```text
-.
 ├── main.py                 # Entry point (Panda3D app)
+├── main.py2                # same as main, but with working servo code (incomplete)
 ├── tracker.py              # Face / vision tracking logic
 ├── talkassistant.py        # Voice + AI assistant logic
 ├── .vscode/                # Editor config / stubs
 └── README.md               # .
+
 ```
 
 ## Setup
