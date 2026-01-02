@@ -1,8 +1,7 @@
 # HoloAssistant (not-a-project)
 
 **Experimental / proof-of-concept repository**  
-This is not a polished or packaged project — it’s a proof of concept for a university course.
-Things may be messy. The code that controls the servos are on the pi, not on this repository. therefore functions are incomplete.
+This is not a polished or packaged project, it’s a proof of concept for a university course.
 
 ---
 
